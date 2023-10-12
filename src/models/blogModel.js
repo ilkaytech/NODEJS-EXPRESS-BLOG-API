@@ -37,7 +37,27 @@ const mongoose = require("mongoose");
 //   }
 // );
 
-/*------------------------------------------------------------*/
+//---------------------
+// BlogCategory
+//---------------------
+
+const blogCatagorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  {
+    collection: "blogCategories",
+    timestamps: true,
+  }
+);
+
+//---------------------
+// BlogPost
+//---------------------
 
 const blogPostSchema = new mongoose.Schema(
   {

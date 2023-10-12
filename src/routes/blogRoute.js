@@ -7,9 +7,9 @@ const router = require("express").Router();
 
 // Call Controllers:
 const { BlogPost } = require("../controller/blogController");
-//----------
-//BlogPost
-//----------
+//---------------------
+// BlogPost
+//---------------------
 router.route("/post").get(BlogPost.list).post(BlogPost.create);
 
 router
