@@ -4,14 +4,16 @@
 ------------------------------------------------------- */
 
 const router = require("express").Router();
+
 // Call Controllers:
 const { BlogPost } = require("../controller/blogController");
 //----------
 //BlogPost
 //----------
-Router.route("/post").get(BlogPost.list).post(BlogPost.create);
+router.route("/post").get(BlogPost.list).post(BlogPost.create);
 
-Router.route("/post/:postId")
+router
+  .route("/post/:postId")
   .get(BlogPost.read)
   .put(BlogPost.update)
   .delete(BlogPost.delete);

@@ -15,10 +15,14 @@ app.use(express.json());
 
 //Connect to MongoDB - Mongoose
 require("./src/dbConnection");
+
 //Home Page
 app.all("/", (req, res) => {
   res.send("Welcome to Blog API");
 });
+
+// Route
+app.use("/blog", require("./src/routes/blogRoute"));
 
 /*--------------------------------------------------------*/
 
