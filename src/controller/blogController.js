@@ -6,7 +6,7 @@
 require("express-async-errors");
 
 // Call Models:
-const { BlogPost } = require("../models/blogModel");
+const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 module.exports.BlogPost = {
   list: async (req, res) => {
