@@ -3,17 +3,15 @@
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-const router = required("express").Router();
+const router = require("express").Router();
 
-const { User } = required("../controller/userController.js");
+const { User } = require("../controller/userController");
 
 //---------------------
 // User
 //---------------------
-router.route("/User").get(User.list).post(User.create);
+router.route("/").get(User.list).post(User.create);
 
-router
-  .route("/User/:UserId")
-  .get(User.read)
-  .put(User.update)
-  .delete(User.delete);
+router.route("/:userId").get(User.read).put(User.update).delete(User.delete);
+
+module.exports = router;

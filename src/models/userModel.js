@@ -11,7 +11,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
       unique: true,
-      required: [true, "Email field must be rewuired."],
+      required: [true, "Email field must be required."],
+      walidate: [
+        (email) => email.includes("@") && email.includes("."),
+        "Email type is incorrect.",
+      ],
     },
 
     password: {
@@ -19,7 +23,6 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-
     firstName: String,
     lastName: String,
   },
@@ -29,4 +32,4 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema, "User");
