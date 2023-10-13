@@ -8,9 +8,9 @@ require("express-async-errors");
 
 const User = require("../models/userModel");
 
-// ------------------------------------------
+// -------------------
 // User
-// ------------------------------------------
+// -------------------
 module.exports.User = {
   list: async (req, res) => {
     const data = await User.find();
