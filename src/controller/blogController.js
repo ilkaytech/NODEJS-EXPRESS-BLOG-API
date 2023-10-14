@@ -5,6 +5,7 @@
 // Catch async-errors and send to errorHandler:
 require("express-async-errors");
 
+const { query } = require("express");
 // Call Models:
 const { BlogCategory, BlogPost } = require("../models/blogModel");
 
@@ -78,18 +79,31 @@ module.exports.BlogCategory = {
 
 module.exports.BlogPost = {
   list: async (req, res) => {
-    //---------------------
+    //------------------------------------
     // Searching & Sorting & Pagination://
-    //---------------------
+    //------------------------------------
+
     // SEARCHİNG: URL?search[key1]=value1&search[key2]=value2
+
     const search = req.query?.search || {};
     // console.log(search);
-
     for (let key in search)
       search[key] = { $regex: search[key], $options: "i" };
 
     // SORTING: URL?sort[key1]=1&sort[key2]=-1 (1= ASC, -1= DESC)
     const sort = req.query?.sort || {};
+
+    // PAGINATİON: URL?page=1&limit=10
+
+    // const limit = req.query?.limit || 20;
+    const limit = Number(req.query?.limit || process.env.PAGE_SIZE || 20);
+    console.log("limit", typeof limit, limit);
+
+    let page = Number(req.query?.page || 1) - 1;
+    console.log("page", typeof page, page);
+
+    const skip = Number(req.query?.skip || page * limit);
+    console.log("skip", typeof skip, skip);
 
     const data = await BlogPost.find(search).sort({ title: 1, content: -1 });
 
