@@ -10,6 +10,16 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
+// SessionCookies:
+const session = require("cookie-session"); // ömür varsa cookie ömür yoksa session
+
+app.use(
+  session({
+    secret: process.env.SECRET_KEY || "secret_keys_for_cookies",
+    // name: "cookie",
+    // maxAge: 1000 * 60 * 60 * 24, // 1 day (miliseconds) session
+  })
+);
 
 /* ------------------------------------------------------- */
 
@@ -29,7 +39,7 @@ app.use("/blog", require("./src/routes/blogRoute"));
 
 /* ------------------------------------------------------- */
 // Synchronization:
-// require('./src/sync')()
+// require("./src/sync")();
 
 // errorHandler:
 app.use(require("./src/errorHandler"));
