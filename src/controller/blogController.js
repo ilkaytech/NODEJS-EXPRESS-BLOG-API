@@ -78,7 +78,22 @@ module.exports.BlogCategory = {
 
 module.exports.BlogPost = {
   list: async (req, res) => {
-    const data = await BlogPost.find().populate("blogCategoryId");
+    //---------------------
+    // Searching & Sorting & Pagination://
+    //---------------------
+    // SEARCHİNG: URL?search[key1]=value1&search[key2]=value2
+    const search = req.query?.search || {};
+    // console.log(search);
+
+    for (let key in search)
+      search[key] = { $regex: search[key], $options: "i" };
+
+    // SORTING: URL?sort[key1]=1&sort[key2]=-1 (1= ASC, -1= DESC)
+    const sort = req.query?.sort || {};
+
+    const data = await BlogPost.find(search).sort({ title: 1, content: -1 });
+
+    // const data = await BlogPost.find().populate("blogCategoryId");
 
     res.status(200).send({
       error: false,
