@@ -15,7 +15,8 @@ const { BlogCategory, BlogPost } = require("../models/blogModel");
 
 module.exports.BlogCategory = {
   list: async (req, res) => {
-    const data = await BlogCategory.find();
+    // const data = await BlogCategory.find();
+    const data = await req.getModelList(blogCategory);
 
     res.status(200).send({
       error: false,
@@ -79,9 +80,7 @@ module.exports.BlogCategory = {
 
 module.exports.BlogPost = {
   list: async (req, res) => {
-    //------------------------------------
-    // Searching & Sorting & Pagination://
-    //------------------------------------
+    /*
 
     // SEARCHİNG: URL?search[key1]=value1&search[key2]=value2
 
@@ -107,8 +106,9 @@ module.exports.BlogPost = {
     let skip = Number(req.query?.skip);
     skip = skip > 0 ? skip : page * limit;
     // console.log("skip", typeof skip, skip);
+    
 
-    // const data = await BlogPost.find(search).sort({ title: 1, content: -1 });
+    const data = await BlogPost.find(search).sort({ title: 1, content: -1 });
 
     // RUN:
     const data = await BlogPost.find(search)
@@ -116,6 +116,8 @@ module.exports.BlogPost = {
       .skip(skip)
       .limit(limit)
       .populate("blogCategoryId");
+*/
+    const data = await req.getModelList(BlogPost, "blogCategoryId");
 
     res.status(200).send({
       error: false,
