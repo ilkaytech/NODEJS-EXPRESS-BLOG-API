@@ -1,4 +1,4 @@
-# BLOG Project with Mongoose
+# BLOG API Project with Mongoose
 
 ## MONGOOSE
 
